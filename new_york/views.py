@@ -10,6 +10,11 @@ def index(request):
 	
 	json_open = open(os.path.join(base_dir, 'static/data.json')).read()
 	json_dict = json.loads(json_open)
-	print json_dict
-
-	return render(request, 'index.html', json_dict)
+	def filter():
+		saved = []
+		for a in json_dict["data"]:
+			saved = saved + [a[8:]]
+		return saved
+	filtered = filter()
+	print filtered
+	return render(request, 'index.html', {'json':json_dict, 'filtered':filtered})

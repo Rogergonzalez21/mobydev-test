@@ -1,12 +1,50 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html>
 <head>
-	<title>MobyDev Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>MobyDev Test</title>
+
 </head>
+
 <body>
-<h1>Prueba de MobyDev</h1>
-{% for key, value in json_dict.items %}
-    <li><a href="{{key}}">{{value}}</a></li>
+
+<div class="container">
+<h1>MobyDev</h1>
+<table class="table table-hover">
+<th>
+	<tr>
+{% for columns in json.meta.view.columns %}
+{% if columns.id != -1 %}
+	<td>
+{{ columns.name }}
+		</td>
+{% endif %}
 {% endfor %}
+	</tr>
+	<tbody>
+		{% for row in filtered %}
+		<tr>
+		{% for a in row %}
+		<td>{{a}}</td>
+		{% endfor %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</th>
+</table>
+</div>
+<footer>
+  <div class="container">
+
+  </div>
+</footer>
+<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block extra-scripts %} {% endblock %}
 </body>
 </html>
