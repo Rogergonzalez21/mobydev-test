@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json, os
 
 # Create your views here.
@@ -17,4 +18,17 @@ def index(request):
 		return saved
 	filtered = filter()
 	print filtered
-	return render(request, 'index.html', {'json':json_dict, 'filtered':filtered})
+	return render(request, 'index.html', {'json':json_dict, 'filtered':paginate(request, filtered)})
+
+def paginate(request, to_paginate):
+    paginator = Paginator(to_paginate, 10)
+
+    page = request.GET.get('page')
+    try:
+        paginated = paginator.page(page)
+    except PageNotAnInteger:
+        paginated = paginator.page(1)
+    except EmptyPage:
+        paginated = paginator.page(paginator.num_pages)
+
+    return paginated

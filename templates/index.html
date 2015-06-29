@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,8 @@
 <body>
 
 <div class="container">
-<h1>MobyDev</h1>
+<h1>MobyDev Test</h1>
+<h4>Made by Roger González for the MobyDev test.</h4>
 <table class="table table-hover">
 <th>
 	<tr>
@@ -37,6 +37,21 @@
 	</tbody>
 </th>
 </table>
+<div class="pagination" style="display:flex;justify-content:center;align-items:center;">
+    <span class="step-links">
+        {% if filtered.has_previous %}
+            <a href="?page={{ filtered.previous_page_number }}" class="btn btn-primary">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ filtered.number }} de {{ filtered.paginator.num_pages }}.
+        </span>
+
+        {% if filtered.has_next %}
+            <a href="?page={{ filtered.next_page_number }}" class="btn btn-primary">Siguiente</a>
+        {% endif %}
+    </span>
+</div>
 </div>
 <footer>
   <div class="container">
@@ -45,6 +60,5 @@
 </footer>
 <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-{% block extra-scripts %} {% endblock %}
 </body>
 </html>
