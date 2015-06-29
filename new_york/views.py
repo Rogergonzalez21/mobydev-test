@@ -9,5 +9,7 @@ base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def index(request):
 	
 	json_open = open(os.path.join(base_dir, 'static/data.json')).read()
-	json_data = JsonResponse(json_open, safe=False)
-	return render(request, 'index.html')
+	json_dict = json.loads(json_open)
+	print json_dict
+
+	return render(request, 'index.html', json_dict)

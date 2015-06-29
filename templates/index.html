@@ -4,6 +4,9 @@
 	<title>MobyDev Test</title>
 </head>
 <body>
-<h1>Hello World!</h1>
+<h1>Prueba de MobyDev</h1>
+{% for key, value in json_dict.items %}
+    <li><a href="{{key}}">{{value}}</a></li>
+{% endfor %}
 </body>
 </html>
